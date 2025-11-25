@@ -1,0 +1,24 @@
+{
+    "model_name": "Random Forest Multi-Label (Optuna Final)",
+    "model_params": {
+        "n_estimators": 350,
+        "max_depth": 40,
+        "max_features": 0.3,
+        "min_samples_leaf": 3,
+        "class_weight": "balanced"
+    },
+    "n_features": 2601,
+    "n_train_samples": 800,
+    "evaluation_metrics": {
+        "test_f1_macro": 0.2243,
+        "test_precision_macro": 0.1922,
+        "test_recall_macro": 0.3409,
+        "test_roc_auc_macro": 0.6896
+    },
+    "generalization_check": {
+        "optuna_cv_f1_macro": 0.2612,
+        "test_f1_macro": 0.2243,
+        "train_test_f1_gap_percent": 66.78
+    },
+    "timestamp": "2025-11-25 19:40:29"
+}
