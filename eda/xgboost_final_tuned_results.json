@@ -4,13 +4,13 @@
     "final_test_macro_f1": 0.5347,
     "final_test_micro_f1": 0.5893,
     "optimal_thresholds": {
-        "IsToxic": 0.5500000000000002,
-        "IsAbusive": 0.5400000000000001,
-        "IsProvocative": 0.45000000000000007,
-        "IsObscene": 0.45000000000000007,
-        "IsHatespeech": 0.25000000000000006,
-        "IsRacist": 0.5700000000000002
+        "IsToxic": 0.5600000000000002,
+        "IsAbusive": 0.6000000000000002,
+        "IsProvocative": 0.49000000000000005,
+        "IsObscene": 0.5900000000000002,
+        "IsHatespeech": 0.36000000000000004,
+        "IsRacist": 0.49000000000000005
     },
     "optimization_status": "COMPLETED (Highest F1 possible for dataset size)",
-    "timestamp": "2025-11-27 14:16:42"
+    "timestamp": "2025-11-28 08:13:31"
 }
