@@ -2,6 +2,12 @@ import requests
 import pandas as pd
 from config import BACKEND_URL
 
+from utils.log_setup import log_setup
+from utils.logger import Logger
+
+log_setup("frontend")
+logger = Logger()
+
 # --- Model Definitions ---
 # This dictionary makes it easy to add more models in the future.
 # The key is the user-facing name, and the value is the endpoint path.
@@ -23,13 +29,16 @@ def get_prediction(selected_model: str, input_text: str) -> pd.DataFrame | dict:
         a dictionary with an 'error' message on failure.
     """
     if selected_model not in ENDPOINTS:
-        return {"error": f"Unknown model selected: {selected_model}"}
+        message = f"Unknown model selected: {selected_model}"
+        logger.log.error(message)
+        return {"error": message}
 
     endpoint_path = ENDPOINTS[selected_model]
     api_url = f"{BACKEND_URL}/{endpoint_path}"
     input_data = {"text": input_text}
 
     try:
+        logger.log.info(f"Sending prediction request to {api_url}")
         response = requests.post(api_url, json=input_data)
         response.raise_for_status()  # Raise an exception for bad status codes
 
@@ -40,6 +49,14 @@ def get_prediction(selected_model: str, input_text: str) -> pd.DataFrame | dict:
         return df
 
     except requests.exceptions.RequestException as e:
-        return {"error": f"Could not connect to the backend: {e}"}
+        message = f"Could not connect to the backend: {e}"
+        logger.log.error(message)
+        return {"error": message}
+    except ValueError as e:
+        message = f"Invalid JSON response from the backend: {e}"
+        logger.log.error(message)
+        return {"error": message}
     except Exception as e:
-        return {"error": f"An error occurred: {e}"}
+        message = f"An unexpected error occurred: {e}"
+        logger.log.error(message)
+        return {"error": message}

@@ -13,7 +13,6 @@ check_and_create_network() {
     # Check if the network exists (suppressing error output if it doesn't)
     docker network inspect "$NETWORK_NAME" >/dev/null 2>&1
     
-    # Check the exit code of the last command (docker network inspect)
     if [ $? -eq 0 ]; then
         echo "✅ Network '$NETWORK_NAME' already exists."
     else
@@ -30,26 +29,47 @@ check_and_create_network() {
     fi
 }
 
+# --- Parameter Handling ---
+ACTION=$1      # First parameter: up or down
+PULL_IMAGES=$2 # Second optional parameter: 'pull'
+
 # Check if the required parameter was provided
-if [ -z "$1" ]; then
-    echo "Usage: $0 {up|down}"
+if [ -z "$ACTION" ]; then
+    echo "Usage: $0 {up|down} [pull]"
     echo "  up: Starts the Docker Compose services."
+    echo "    (Optional) Add 'pull' as the second argument to pull the latest images first."
     echo "  down: Stops and removes the Docker Compose services."
     exit 1
 fi
 
-ACTION=$1
-
 case "$ACTION" in
     up)
-        # Run the network check function before starting services
+        # 1. Check for and create the network
         check_and_create_network
 
-        echo "Starting $APP_NAME services..."
+        # 2. Handle optional 'pull' command
+        if [ "$PULL_IMAGES" == "pull" ]; then
+            echo "Pulling latest images before starting services..."
+            
+            # Pull images for both backend and frontend compose files
+            docker compose -f "$BACKEND_COMPOSE_FILE" pull 
+            docker compose -f "$FRONTEND_COMPOSE_FILE" pull
+            
+            if [ $? -eq 0 ]; then
+                echo "✅ Image pull successful."
+            else
+                echo "❌ Error pulling images. Continuing with local images."
+            fi
+        fi
+
+        echo "Starting services..."
         # -d: Run containers in detached mode (in the background)
-        # --build: Rebuild images if they have changed
+        # --build: Always rebuilds images, which is useful if source code changed
+        echo "Starting Backend service..."
         docker compose -f "$BACKEND_COMPOSE_FILE" up -d --build
-        docker compose -f "$FRONTEND_COMPOSE_FILE" up -d --pull always
+        
+        echo "Starting Frontend service..."
+        docker compose -f "$FRONTEND_COMPOSE_FILE" up -d --build
         
         if [ $? -eq 0 ]; then
             echo "✅ Services started successfully."
@@ -60,8 +80,7 @@ case "$ACTION" in
     
     down)
         echo "Stopping and removing services..."
-        # --rmi all: Removes all images created by the build process
-        # -v: Removes volumes declared in the Compose file
+        # Stop and remove frontend first, then backend
         docker compose -f "$FRONTEND_COMPOSE_FILE" down --rmi local -v
         docker compose -f "$BACKEND_COMPOSE_FILE" down --rmi local -v
         
@@ -74,7 +93,7 @@ case "$ACTION" in
         
     *)
         echo "Invalid parameter: '$ACTION'"
-        echo "Usage: $0 {up|down}"
+        echo "Usage: $0 {up|down} [pull]"
         exit 1
         ;;
 esac

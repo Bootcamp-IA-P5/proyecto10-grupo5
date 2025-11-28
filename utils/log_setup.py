@@ -2,9 +2,12 @@ import logging
 import logging.config
 from pathlib import Path
 
-from backend.config import LOG_FILE_NAME, LOG_LEVEL, LOG_BASE_DIR
-
-def log_setup():
+def log_setup(source: str = "backend"):
+    if source == "backend":
+        from backend.config import LOG_FILE_NAME, LOG_LEVEL, LOG_BASE_DIR
+    else:
+        from frontend.config import LOG_FILE_NAME, LOG_LEVEL, LOG_BASE_DIR
+    
     # Ensure the log directory exists
     log_path = Path(LOG_FILE_NAME)
     if not log_path.is_absolute():
@@ -58,25 +61,12 @@ def log_setup():
                 'handlers': ['file', 'console'],
                 'level': LOG_LEVEL,
                 'propagate': True,
-            },
-            'watchfiles': {
-                'handlers': ['console'], # Optional: Keep it in console if you want, remove 'file'
-                'level': 'WARNING',      # Only show warnings/errors, hide DEBUG changes
-                'propagate': False,      # Stop it from bubbling up to the root logger
-            },
-            # You might also want to silence uvicorn access logs if they are too noisy
-            'uvicorn.access': {
-                'handlers': ['console'],
-                'level': 'WARNING',
-                'propagate': False,
-            },
-            # urllib3
-            'urllib3': {
-                'handlers': ['console'],
-                'level': 'WARNING',
-                'propagate': False,
             }
         }
     }
 
     logging.config.dictConfig(logging_config)
+    logging.getLogger("watchdog").setLevel(logging.WARNING)
+    logging.getLogger("uvicorn.access").setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+    logging.getLogger("watchfiles").setLevel(logging.WARNING)
