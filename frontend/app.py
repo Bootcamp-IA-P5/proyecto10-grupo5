@@ -1,78 +1,66 @@
 import streamlit as st
-import requests
-import pandas as pd
-import os
-
-# Get the backend URL from an environment variable or use a default
-BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
-API_URL = os.getenv("API_URL", BACKEND_URL)
+from config import API_URL, APP_TITLE, PAGE_ICON
+from models import ENDPOINTS, get_prediction
 
 # --- App Configuration ---
 st.set_page_config(
-    page_title="Toxicity Classifier",
-    page_icon="🤖",
+    page_title=APP_TITLE,
+    page_icon=PAGE_ICON,
     layout="centered",
     initial_sidebar_state="expanded",
 )
 
-# --- API Documentation Link ---
-st.markdown(
-    f"""
-    <div style="text-align: right;">
-        <a href="{API_URL}" target="_blank">API Documentation</a>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+def render_api_doc_link():
+    """Renders the API documentation link in the top right."""
+    st.markdown(
+        f"""
+        <div style="text-align: right;">
+            <a href="{API_URL}" target="_blank">API Documentation</a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-# --- App Title ---
-st.title("Toxicity Classifier")
+def render_model_selection():
+    """Renders the model selection dropdown."""
+    st.title(APP_TITLE)
+    selected_model = st.selectbox(
+        "Choose a model for prediction:",
+        options=list(ENDPOINTS.keys())
+    )
+    return selected_model
 
-# --- Model Selection ---
-# This dictionary makes it easy to add more models in the future.
-# The key is the user-facing name, and the value is the endpoint path.
-ENDPOINTS = {
-    "Logistic Regression": "logistic_regression/predict",
-    "Naive Bayes": "naive_bayes/predict",
-}
+def render_input_area():
+    """Renders the text input area."""
+    st.header("Enter Text for Analysis")
+    input_text = st.text_area(
+        "Text to classify:", 
+        "You should be banned from the internet for saying that.",
+        height=150
+    )
+    return input_text
 
-selected_model = st.selectbox(
-    "Choose a model for prediction:",
-    options=list(ENDPOINTS.keys())
-)
+def run_app():
+    """Main function to run the Streamlit application."""
+    render_api_doc_link()
+    
+    selected_model = render_model_selection()
+    input_text = render_input_area()
 
-# --- Input Features ---
-st.header("Enter Text for Analysis")
-input_text = st.text_area(
-    "Text to classify:", 
-    "You should be banned from the internet for saying that.",
-    height=150
-)
+    # --- Prediction Button ---
+    if st.button("Get Prediction", type="primary"):
+        with st.spinner(f"Getting prediction from **{selected_model}**..."):
+            result = get_prediction(selected_model, input_text)
 
-# --- Prediction ---
-if st.button("Get Prediction", type="primary"):
-    endpoint_path = ENDPOINTS[selected_model]
-    api_url = f"{BACKEND_URL}/{endpoint_path}"
+        if isinstance(result, pd.DataFrame):
+            st.success("Prediction successful!")
+            # Display the results in a readable format
+            st.dataframe(result.set_index('Category'))
+        elif isinstance(result, dict) and 'error' in result:
+            st.error(result['error'])
+        else:
+            st.error("An unexpected error occurred during prediction.")
 
-    # The input data should match what your backend API expects: a JSON with a "text" key.
-    input_data = {"text": input_text}
-
-    try:
-        with st.spinner("Getting prediction..."):
-            response = requests.post(api_url, json=input_data)
-            response.raise_for_status()  # Raise an exception for bad status codes
-
-        prediction = response.json()
-
-        st.success("Prediction successful!")
-        
-        # Create a DataFrame for better visualization
-        df = pd.DataFrame(prediction.items(), columns=['Category', 'Probability'])
-        
-        # Display the results in a more readable format
-        st.dataframe(df.set_index('Category'))
-
-    except requests.exceptions.RequestException as e:
-        st.error(f"Could not connect to the backend: {e}")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
+if __name__ == "__main__":
+    import pandas as pd # Import here to ensure get_prediction can be tested standalone
+    run_app()
