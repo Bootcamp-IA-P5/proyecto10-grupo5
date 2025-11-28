@@ -78,32 +78,32 @@ def generate_summary(df: pd.DataFrame) -> str:
 
     # 1. Handle the non-toxic case
     if not is_toxic_detected:
-        return "The text is classified as **non-toxic**."
+        return "The text is classified as <b>non-toxic</b>."
     
     # 2. Prepare sub-category names for clean display (e.g., 'IsHateSpeech' -> 'hate speech')
     categories_clean = [cat.replace('Is', '').replace('Hate', ' hate').lower() for cat in sub_categories]
     
     # 3. Handle the case where ONLY 'IsToxic' is true
     if not categories_clean:
-        return "The text is classified as **toxic**, but does not clearly fall into a specific sub-category."
+        return "The text is classified as <b>toxic</b>, but does not clearly fall into a specific sub-category."
     
     # 4. Handle toxic + one or more sub-categories
     
     # Start the sentence
-    summary = "The text is **toxic**"
+    summary = "The text is <b>toxic</b>"
     
     # Join the rest of the categories
     if len(categories_clean) == 1:
         # e.g., "...and classified as provocative."
-        summary += f", and is specifically characterized as **{categories_clean[0]}**."
+        summary += f", and is specifically characterized as <b>{categories_clean[0]}</b>."
     else:
         # e.g., "...and contains characteristics of abusive, racist, and religious hate."
         last_category = categories_clean[-1]
         other_categories = categories_clean[:-1]
         
         # Build the descriptive list
-        category_list = ", ".join([f"**{c}**" for c in other_categories])
-        summary += f", containing characteristics of {category_list}, and **{last_category}**."
+        category_list = ", ".join([f"<b>{c}</b>" for c in other_categories])
+        summary += f", containing characteristics of {category_list}, and <b>{last_category}</b>."
         
     return summary
 

@@ -6,8 +6,8 @@ FRONTEND_COMPOSE_FILE="docker/frontend.compose.yml"
 NETWORK_NAME="nginx_proxy_network"
 
 # Define the image names to build/push (These must match service names in your compose files)
-BACKEND_IMAGE="osrogon/backend-service" 
-FRONTEND_IMAGE="osrogon/frontend-service"
+BACKEND_IMAGE="osrogon/project10-backend" 
+FRONTEND_IMAGE="osrogon/project10-frontend"
 # ----------------------------
 
 # Function to check for and create the external network

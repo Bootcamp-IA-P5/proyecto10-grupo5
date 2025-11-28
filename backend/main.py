@@ -18,6 +18,6 @@ app.include_router(logistic_regression.router)
 app.include_router(naive_bayes.router)
 
 # Optional: Add a root health check endpoint
-@app.get("/")
-def read_root():
-    return {"status": "ok", "message": "API is running. Use /logistic_regression/predict or /naive_bayes/predict for predictions."}
+@app.get("/health")
+def read_health():
+    return {"status": "ok"}
