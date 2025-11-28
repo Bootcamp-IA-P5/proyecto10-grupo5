@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # --- Script Configuration ---
-BACKEND_COMPOSE_FILE="backend_compose.yml"
-FRONTEND_COMPOSE_FILE="frontend_compose.yml"
+BACKEND_COMPOSE_FILE="docker/backend_compose.yml"
+FRONTEND_COMPOSE_FILE="docker/frontend_compose.yml"
 NETWORK_NAME="nginx_proxy_network"
 # ----------------------------
 
