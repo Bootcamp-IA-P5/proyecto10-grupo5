@@ -1,0 +1,5 @@
+file,type,oof_f1,test_f1,overfit_gap,train_macro_f1_tuned,test_macro_f1_tuned,conservative_oof_f1,conservative_test_f1,conservative_overfit_gap
+eda/logreg_spacy_oof_gap_search_record.json,record,0.3368838565185501,0.33171794158227336,0.015334409281770562,,,,,
+eda/xgboost_tuned_overfit_gap.json,xgb_tuned,,,0.28112858418518116,0.7518675588774094,0.540496096555435,,,
+eda/exp_synonym_1000/summary_synonym_1000.json,exp_summary,,,,,,0.4842434177713524,0.47568383533527786,0.01767619780041314
+eda/exp_synonym_1000/summary_synonym_1000_thresholded.json,exp_summary,,,,,,0.4842434177713524,0.47568383533527786,0.01767619780041314
