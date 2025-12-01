@@ -40,6 +40,7 @@ build_and_push() {
 
     if [ -z "$ARCHS" ]; then
         echo "❌ Error: Architectures not specified for build_push."
+        echo ""
         echo "Usage: $0 build_push {amd|arm|all} [tag]"
         exit 1
     fi
@@ -112,12 +113,14 @@ TAG=$3         # Third optional parameter: image tag (for build_push)
 # Check if the required parameter was provided
 if [ -z "$ACTION" ]; then
     echo "Usage: $0 {up|down|build_push} [pull|arch] [tag]"
-    echo "  up: Starts the Docker Compose services."
-    echo "    (Optional) Add 'pull' as the second argument to pull the latest images first."
-    echo "  down: Stops and removes the Docker Compose services."
-    echo "  build_push: Builds multi-architecture images and pushes them to Docker Hub."
-    echo "    Required: Second argument must be the architecture: **amd**, **arm**, or **all**."
-    echo "    (Optional) Third argument is the Docker tag (e.g., 'v1.0.0'). Defaults to 'latest'."
+    echo ""
+    echo "Commands:"
+    echo "  up          Starts the Docker Compose services."
+    echo "              (Optional) Add 'pull' as the second argument to pull the latest images first."
+    echo "  down        Stops and removes the Docker Compose services."
+    echo "  build_push  Builds multi-architecture images and pushes them to Docker Hub."
+    echo "              Required: Second argument must be the architecture: **amd**, **arm**, or **all**."
+    echo "              (Optional) Third argument is the Docker tag (e.g., 'v1.0.0'). Defaults to 'latest'."
     exit 1
 fi
 
@@ -177,6 +180,7 @@ case "$ACTION" in
         
     *)
         echo "Invalid parameter: '$ACTION'"
+        echo ""
         echo "Usage: $0 {up|down|build_push} [pull|arch] [tag]"
         exit 1
         ;;
