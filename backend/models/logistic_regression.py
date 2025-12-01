@@ -8,8 +8,9 @@ from utils.log_setup import log_setup
 from utils.logger import Logger
 
 # Load the specific model for this router
-LOGISTIC_REGRESSION_MODEL = load_model('logistic_regression.pkl')
-LOGISTIC_REGRESSION_VECTORIZER = load_vectorizer('text_vectorizer.pkl')
+PREFIX = "test_"
+LOGISTIC_REGRESSION_MODEL = load_model(PREFIX + 'logistic_regression.pkl')
+LOGISTIC_REGRESSION_VECTORIZER = load_vectorizer(PREFIX + 'text_vectorizer.pkl')
 
 log_setup()
 logger = Logger()
