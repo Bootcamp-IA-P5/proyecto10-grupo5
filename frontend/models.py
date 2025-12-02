@@ -43,6 +43,7 @@ def get_prediction(selected_model: str, input_text: str) -> pd.DataFrame | dict:
         response.raise_for_status()  # Raise an exception for bad status codes
 
         prediction = response.json()
+        logger.log.debug(prediction)
         
         # Create a DataFrame for better visualization
         df = pd.DataFrame(prediction.items(), columns=['Category', 'Probability'])

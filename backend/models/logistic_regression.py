@@ -6,9 +6,9 @@ from backend.schemas import TextIn, ToxicityOut, OUTPUT_CATEGORIES
 
 from utils.log_setup import log_setup
 from utils.logger import Logger
+from backend.config import PREFIX
 
 # Load the specific model for this router
-PREFIX="test_"
 LOGISTIC_REGRESSION_MODEL = load_model(PREFIX + 'logistic_regression.pkl')
 LOGISTIC_REGRESSION_VECTORIZER = load_vectorizer(PREFIX + 'text_vectorizer.pkl')
 
