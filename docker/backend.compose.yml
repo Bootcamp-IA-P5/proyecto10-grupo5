@@ -1,0 +1,19 @@
+services:
+  # 1. Backend Service
+  project10-backend:
+    # Use the image you pushed to Docker Hub
+    image: osrogon/project10-backend:latest
+    container_name: project10-backend
+    restart: unless-stopped
+    # Internal port exposed in the Dockerfile (e.g., 8000)
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    networks:
+      - nginx_proxy_network
+
+networks:
+  nginx_proxy_network:
+    external: true # Tells Docker Compose to use an existing network
+    driver: bridge

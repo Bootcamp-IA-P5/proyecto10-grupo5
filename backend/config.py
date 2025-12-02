@@ -1,0 +1,4 @@
+LOG_LEVEL="DEBUG"
+LOG_FILE_NAME="backend.log"
+LOG_BASE_DIR="logs"
+PREFIX=""
