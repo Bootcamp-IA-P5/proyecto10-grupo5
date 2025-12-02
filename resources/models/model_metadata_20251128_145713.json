@@ -1,0 +1,47 @@
+{
+  "timestamp": "20251128_145713",
+  "model_type": "SVM",
+  "kernel": "linear",
+  "hyperparameters": {
+    "C": 0.9395445020858183
+  },
+  "metrics": {
+    "train_accuracy": 0.8264411027568922,
+    "test_accuracy": 0.6861538461538461,
+    "train_f1": 0.8258533072261065,
+    "test_f1": 0.6884663243873591,
+    "accuracy_diff": 0.14028725660304608,
+    "f1_diff": 0.1373869828387474,
+    "overfitting_percentage": 14.028725660304609
+  },
+  "data_info": {
+    "original_samples": 991,
+    "augmented_samples": 1299,
+    "train_samples": 1596,
+    "test_samples": 325
+  },
+  "tfidf_config": {
+    "max_features": 350,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 10,
+    "max_df": 0.8,
+    "vocabulary_size": 350
+  },
+  "techniques": [
+    "Data Augmentation",
+    "SMOTE",
+    "TF-IDF with Bigrams",
+    "Stopwords Removal",
+    "Optuna Optimization",
+    "10-fold Cross-Validation"
+  ],
+  "categories": [
+    "Abusive",
+    "Hatespeech",
+    "NonToxic",
+    "Racist"
+  ]
+}
