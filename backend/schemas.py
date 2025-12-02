@@ -10,9 +10,9 @@ OUTPUT_CATEGORIES = [
     'IsObscene', 
     'IsHatespeech', 
     'IsRacist', 
-    'IsThreat', 
-    'IsReligiousHate', 
-    'IsNationalist'
+    # 'IsThreat', 
+    # 'IsReligiousHate', 
+    # 'IsNationalist'
 ]
 
 # Define the input structure
@@ -45,6 +45,6 @@ class ToxicityOut(BaseModel):
     IsObscene: float = Field(..., ge=0.0, le=1.0)
     IsHatespeech: float = Field(..., ge=0.0, le=1.0)
     IsRacist: float = Field(..., ge=0.0, le=1.0)
-    IsThreat: float = Field(..., ge=0.0, le=1.0)
-    IsReligiousHate: float = Field(..., ge=0.0, le=1.0)
-    IsNationalist: float = Field(..., ge=0.0, le=1.0)
+    # IsThreat: float = Field(..., ge=0.0, le=1.0)
+    # IsReligiousHate: float = Field(..., ge=0.0, le=1.0)
+    # IsNationalist: float = Field(..., ge=0.0, le=1.0)
