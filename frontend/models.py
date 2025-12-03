@@ -14,7 +14,9 @@ logger = Logger()
 ENDPOINTS = {
     "Logistic Regression": "logistic_regression/predict",
     "Naive Bayes": "naive_bayes/predict",
+    "SVM (Support Vector Machine)": "svm/predict",
 }
+
 
 def get_prediction(selected_model: str, input_text: str) -> pd.DataFrame | dict:
     """
@@ -25,7 +27,7 @@ def get_prediction(selected_model: str, input_text: str) -> pd.DataFrame | dict:
         input_text: The text string to be classified.
 
     Returns:
-        A pandas DataFrame of categories and probabilities on success, or 
+        A pandas DataFrame of categories and probabilities on success, or
         a dictionary with an 'error' message on failure.
     """
     if selected_model not in ENDPOINTS:
@@ -44,9 +46,9 @@ def get_prediction(selected_model: str, input_text: str) -> pd.DataFrame | dict:
 
         prediction = response.json()
         logger.log.debug(prediction)
-        
+
         # Create a DataFrame for better visualization
-        df = pd.DataFrame(prediction.items(), columns=['Category', 'Probability'])
+        df = pd.DataFrame(prediction.items(), columns=["Category", "Probability"])
         return df
 
     except requests.exceptions.RequestException as e:
