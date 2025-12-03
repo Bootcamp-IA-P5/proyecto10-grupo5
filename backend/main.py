@@ -16,6 +16,7 @@ app = FastAPI(
 # /naive_bayes/predict
 app.include_router(logistic_regression.router)
 app.include_router(naive_bayes.router)
+# add app.incude_router(mi esquema) bunty
 
 # Optional: Add a root health check endpoint
 @app.get("/health")

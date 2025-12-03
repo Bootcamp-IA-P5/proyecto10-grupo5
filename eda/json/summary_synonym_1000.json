@@ -1,0 +1,22 @@
+{
+  "conservative": {
+    "oof_f1": 0.48121387705515156,
+    "test_f1": 0.4796220890795775,
+    "overfit_gap": 0.0033078596679614117
+  },
+  "xgboost": {
+    "oof_f1": 0.7710168648276644,
+    "test_f1": 0.7460787345874986,
+    "overfit_gap": 0.032344467906989145
+  },
+  "n_train": 3000,
+  "n_test": 751,
+  "targets": [
+    "IsToxic",
+    "IsAbusive",
+    "IsProvocative",
+    "IsObscene",
+    "IsHatespeech",
+    "IsRacist"
+  ]
+}
