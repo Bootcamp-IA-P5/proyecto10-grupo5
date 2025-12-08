@@ -1,0 +1,18 @@
+services:
+  # Frontend Service
+  project10-frontend:
+    image: osrogon/project10-frontend:latest
+    container_name: project10-frontend
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://project10-backend:8000
+      - API_URL=http://localhost:8000/docs
+    networks:
+      - nginx_proxy_network
+
+networks:
+  nginx_proxy_network:
+    external: true
+    driver: bridge
