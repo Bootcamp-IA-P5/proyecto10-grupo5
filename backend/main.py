@@ -2,6 +2,7 @@ from fastapi import FastAPI
 # Import the routers from the individual model files
 from backend.models import logistic_regression
 from backend.models import naive_bayes
+from backend.models import xgboost  # Import xgboost module
 
 # --- FastAPI Initialization ---
 app = FastAPI(
@@ -14,9 +15,10 @@ app = FastAPI(
 # Endpoints will be accessible at:
 # /logistic_regression/predict
 # /naive_bayes/predict
+# /xgboost/predict
 app.include_router(logistic_regression.router)
 app.include_router(naive_bayes.router)
-# add app.incude_router(mi esquema) bunty
+app.include_router(xgboost.router)  # XGBoost router
 
 # Optional: Add a root health check endpoint
 @app.get("/health")

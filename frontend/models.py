@@ -14,7 +14,7 @@ logger = Logger()
 ENDPOINTS = {
     "Logistic Regression": "logistic_regression/predict",
     "Naive Bayes": "naive_bayes/predict",
-    # mis modelos bunty
+    "XGBoost (TF-IDF)": "xgboost/predict",  # Added XGBoost model Bunty
 }
 
 def get_prediction(selected_model: str, input_text: str) -> pd.DataFrame | dict:
