@@ -8,8 +8,8 @@ from utils.logger import Logger
 from backend.config import PREFIX
 
 # Load the specific model for this router
-SVM_MODEL = load_model(PREFIX + "svm_multilabel_model.pkl")
-SVM_VECTORIZER = load_vectorizer(PREFIX + "tfidf_vectorizer.pkl")
+SVM_MODEL = load_model(PREFIX + "svm_multilabel_model_simple.pkl")
+SVM_VECTORIZER = load_vectorizer(PREFIX + "tfidf_vectorizer_svm.pkl")
 
 log_setup()
 logger = Logger()
