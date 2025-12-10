@@ -9,8 +9,8 @@ A foundational template for Python projects, equipped with a containerized devel
 
 - [About The Project](#about-the-project)
 - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Development Environment](#development-environment)
 - [Contributing](#contributing)
 - [License](#license)
@@ -27,9 +27,9 @@ Follow these steps to get your development environment up and running.
 
 Ensure you have the following software installed on your system:
 
-*   [Visual Studio Code](https://code.visualstudio.com/)
-*   [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-*   [VS Code Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [VS Code Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 ### Installation
 
@@ -51,15 +51,57 @@ Ensure you have the following software installed on your system:
 
 The development environment is defined in the `.devcontainer/devcontainer.json` file and includes:
 
-*   **Image**: A Microsoft-provided Python 3.12 image (`mcr.microsoft.com/devcontainers/python:1-3.12-bullseye`).
-*   **Post-Create Command**: Automatically installs Python packages from `requirements.txt` into the user's site-packages directory.
-*   **VS Code Extensions**: The following extensions are installed by default to enhance the development experience:
-    *   `ms-python.python`: Official Python support.
-    *   `ms-python.vscode-pylance`: Pylance for rich language support.
-    *   `tal7aouy.indent-colorizer`: For visualizing indentation levels.
-    *   `gnramsay.create-python-module`: Helper for creating Python modules.
-    *   `kevinrose.vsc-python-indent`: For Python-specific indentation.
-    *   `njpwerner.autodocstring`: Automatically generate Python docstrings.
+- **Image**: A Microsoft-provided Python 3.12 image (`mcr.microsoft.com/devcontainers/python:1-3.12-bullseye`).
+- **Post-Create Command**: Automatically installs Python packages from `requirements.txt` into the user's site-packages directory.
+- **VS Code Extensions**: The following extensions are installed by default to enhance the development experience:
+  - `ms-python.python`: Official Python support.
+  - `ms-python.vscode-pylance`: Pylance for rich language support.
+  - `tal7aouy.indent-colorizer`: For visualizing indentation levels.
+  - `gnramsay.create-python-module`: Helper for creating Python modules.
+  - `kevinrose.vsc-python-indent`: For Python-specific indentation.
+  - `njpwerner.autodocstring`: Automatically generate Python docstrings.
+
+### Running Locally
+
+To run the application locally, you need to start both the backend and frontend services in separate terminals.
+
+#### Prerequisites
+
+Ensure you have Python 3.12+ and the virtual environment activated.
+
+#### Terminal 1 - Backend (FastAPI)
+
+```bash
+cd /path/to/proyecto10-grupo5
+source .venv/bin/activate
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+The backend API will be available at:
+
+- API: http://localhost:8000
+- API Documentation: http://localhost:8000/docs
+
+#### Terminal 2 - Frontend (Streamlit)
+
+```bash
+cd /path/to/proyecto10-grupo5
+source .venv/bin/activate
+streamlit run frontend/app.py --server.port 8501
+```
+
+The frontend application will be available at:
+
+- Frontend: http://localhost:8501
+
+#### Available Models
+
+The application includes four toxicity classification models:
+
+- **Logistic Regression**: Binary classification using logistic regression
+- **Naive Bayes**: Multinomial Naive Bayes classifier
+- **SVM (Support Vector Machine)**: Multi-label classification with SVM
+- **LightGBM**: Gradient boosting model with optimized thresholds
 
 ## Contributing
 
@@ -67,13 +109,13 @@ Contributions are what make the open-source community such an amazing place to l
 
 This project uses GitHub Issues to track tasks, bugs, and feature requests. To create an issue, please use one of the available templates:
 
-*   📝 **Task Request**: For general, non-code-related tasks.
-*   🧩 **Feature Request**: Suggest new functionality for the project.
-*   ⛔ **Fix error Request**: Report a bug or an error that needs fixing.
-*   🗂️ **Chore Request**: For maintenance tasks like refactoring or updating dependencies.
-*   📚 **Documentation Request**: Request new or updated documentation.
-*   🚧 **Test Request**: For adding new unit tests.
-*   👥 **Daily meeting**: To summarize daily stand-up meetings.
+- 📝 **Task Request**: For general, non-code-related tasks.
+- 🧩 **Feature Request**: Suggest new functionality for the project.
+- ⛔ **Fix error Request**: Report a bug or an error that needs fixing.
+- 🗂️ **Chore Request**: For maintenance tasks like refactoring or updating dependencies.
+- 📚 **Documentation Request**: Request new or updated documentation.
+- 🚧 **Test Request**: For adding new unit tests.
+- 👥 **Daily meeting**: To summarize daily stand-up meetings.
 
 You can create a new issue here.
 
