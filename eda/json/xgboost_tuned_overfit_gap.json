@@ -1,0 +1,8 @@
+{
+  "train_macro_f1_tuned": 0.7518675588774094,
+  "train_micro_f1_tuned": 0.7347086500180963,
+  "test_macro_f1_tuned": 0.540496096555435,
+  "test_micro_f1_tuned": 0.595679012345679,
+  "overfit_diff": 0.21137146232197446,
+  "overfit_gap": 0.28112858418518116
+}

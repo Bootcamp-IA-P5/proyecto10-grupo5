@@ -72,16 +72,19 @@ def generate_summary(df: pd.DataFrame) -> str:
     
     # Check if 'IsToxic' is one of the detected categories
     is_toxic_detected = 'IsToxic' in toxic_categories
+    print(toxic_categories)
     
     # The categories we want to list (excluding 'IsToxic' for cleaner phrasing)
     sub_categories = [cat for cat in toxic_categories if cat != 'IsToxic']
-
-    # 1. Handle the non-toxic case
-    if not is_toxic_detected:
-        return "The text is classified as <b>non-toxic</b>."
     
-    # 2. Prepare sub-category names for clean display (e.g., 'IsHateSpeech' -> 'hate speech')
+    # 1. Prepare sub-category names for clean display (e.g., 'IsHateSpeech' -> 'hate speech')
     categories_clean = [cat.replace('Is', '').replace('Hate', ' hate').lower() for cat in sub_categories]
+    
+    # 2. Handle the non-toxic case
+    if not is_toxic_detected and len(categories_clean) == 0:
+        return "The text is classified as <b>non-toxic</b>."
+    elif not is_toxic_detected and len(categories_clean)>0:
+        return "The text is classified as <b>non-toxic</b>, althoug some of the subcategories have been detected."
     
     # 3. Handle the case where ONLY 'IsToxic' is true
     if not categories_clean:

@@ -1,0 +1,14 @@
+{
+    "model_name": "Random Forest",
+    "training_time": 2.643402576446533,
+    "test_accuracy": 0.72,
+    "test_precision": 0.78125,
+    "test_recall": 0.5434782608695652,
+    "test_f1": 0.6410256410256411,
+    "test_roc_auc": 0.8213566827697262,
+    "cv_f1_mean": 0.6674373716038631,
+    "cv_f1_std": 0.029735048080403458,
+    "overfit_gap": 0.1775,
+    "n_features": 2601,
+    "timestamp": "2025-11-25 09:28:38"
+}
