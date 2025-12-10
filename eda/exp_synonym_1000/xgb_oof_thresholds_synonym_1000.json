@@ -1,0 +1,20 @@
+{
+  "thresholds": {
+    "IsToxic": 0.67,
+    "IsAbusive": 0.62,
+    "IsProvocative": 0.33,
+    "IsObscene": 0.3,
+    "IsHatespeech": 0.27,
+    "IsRacist": 0.2
+  },
+  "best_oof_f1_per_label": {
+    "IsToxic": 0.9346694931586047,
+    "IsAbusive": 0.889002557544757,
+    "IsProvocative": 0.7828709288299156,
+    "IsObscene": 0.7643192488262911,
+    "IsHatespeech": 0.7791005291005291,
+    "IsRacist": 0.7687165775401069
+  },
+  "oof_macro_f1": 0.8197798891667007,
+  "test_macro_f1": 0.8372617048547255
+}

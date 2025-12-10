@@ -1,0 +1,23 @@
+{
+    "model_name": "Random Forest Multi-Label (Optimized)",
+    "model_params": {
+        "n_estimators": 200,
+        "max_depth": 30,
+        "class_weight": "balanced",
+        "max_features": "sqrt"
+    },
+    "n_features": 2601,
+    "n_train_samples": 800,
+    "evaluation_metrics": {
+        "test_accuracy": 0.07,
+        "test_f1_macro": 0.19699930345948455,
+        "test_precision_macro": 0.17362684124386255,
+        "test_recall_macro": 0.37661971830985913,
+        "test_roc_auc_macro": 0.685306279044106
+    },
+    "generalization_check": {
+        "cv_f1_mean_macro": 0.1542,
+        "cv_test_f1_gap_percent": -9.3
+    },
+    "timestamp": "2025-11-27 08:02:30"
+}
