@@ -1,0 +1,6 @@
+{
+  "oof_train_macro_f1": 0.0,
+  "test_macro_f1": 0.0,
+  "overfit_diff": null,
+  "overfit_gap": null
+}

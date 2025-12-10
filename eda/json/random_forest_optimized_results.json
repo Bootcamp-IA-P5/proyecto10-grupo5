@@ -1,0 +1,23 @@
+{
+    "model_name": "Random Forest Classifier (Optimized via Optuna)",
+    "optimization_duration_seconds": 20.5,
+    "best_params_found": {
+        "n_estimators": 450,
+        "max_depth": 30,
+        "max_features": "sqrt",
+        "min_samples_leaf": 3,
+        "criterion": "entropy",
+        "class_weight": "balanced"
+    },
+    "test_accuracy": 0.72,
+    "test_f1": 0.65,
+    "test_roc_auc": 0.808071658615137,
+    "test_precision_toxic_class_1": 0.76,
+    "test_recall_toxic_class_1": 0.57,
+    "n_features": 2601,
+    "n_train_samples": 800,
+    "cv_f1_mean_optuna": 0.675,
+    "overfit_gap_f1_absolute": 0.025000000000000022,
+    "overfit_gap_f1_percent": "3.70%",
+    "timestamp": "2025-11-25 11:31:54"
+}

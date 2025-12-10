@@ -1,0 +1,21 @@
+{
+    "model_name": "XGBoost per-label (SpaCy TF-IDF) with EarlyStopping (xgb.train)",
+    "n_labels": 6,
+    "test_f1_macro": 0.39031081123849765,
+    "train_f1_macro": 0.7748391065545054,
+    "test_roc_auc_macro": 0.7312986801390906,
+    "training_time_seconds": 63.08692193031311,
+    "params": {
+        "max_depth": 6,
+        "eta": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "alpha": 1.0,
+        "lambda": 1.0,
+        "objective": "binary:logistic",
+        "eval_metric": "logloss",
+        "tree_method": "hist",
+        "seed": 42
+    },
+    "timestamp": "2025-11-27 19:32:16"
+}

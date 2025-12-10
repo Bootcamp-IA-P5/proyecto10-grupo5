@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from backend.models import logistic_regression
 from backend.models import naive_bayes
 from backend.models import svm
+from backend.models import xgboost
 
 # --- FastAPI Initialization ---
 app = FastAPI(
@@ -17,9 +18,11 @@ app = FastAPI(
 # /logistic_regression/predict
 # /naive_bayes/predict
 # /svm/predict
+# /xgboost/predict
 app.include_router(logistic_regression.router)
 app.include_router(naive_bayes.router)
 app.include_router(svm.router)
+app.include_router(xgboost.router)
 
 
 # Optional: Add a root health check endpoint
