@@ -15,6 +15,7 @@ ENDPOINTS = {
     "Logistic Regression": "logistic_regression/predict",
     "Naive Bayes": "naive_bayes/predict",
     "SVM (Support Vector Machine)": "svm/predict",
+    "LightGBM": "lightgbm/predict",
 }
 
 
